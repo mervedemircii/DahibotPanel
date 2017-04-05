@@ -12,7 +12,3 @@ $(document).ready(function () {
         $(this).find("#btnDelete").hide();
     });
 });
-
-$(function() {
-    $('#sidebar-wrapper').load("sidebar.html");
-});

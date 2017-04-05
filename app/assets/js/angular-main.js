@@ -1,32 +1,29 @@
 var app = angular.module('myApp', ["ngAnimate"]);
-app.controller('QAControl', function($scope) {
-    $scope.QAList = [
-        {
-            "question": "How are you",
-            "answer": "Fine thanks.",
-            "qaId": "58d8fb62eb29aa1c4a301b37"
-        },
-        {
-            "question": "What is your name?",
-            "answer": "My name is Robot",
-            "qaId": "58d8fb62eb29aa1c4a301b38"
-        },
-        {
-            "question": "What time is it?",
-            "answer": "It is 12 o'clock.",
-            "qaId": "58d8fb62eb29aa1c4a301b39"
-        },
-        {
-            "question": "What is the price?",
-            "answer": "Just 15$",
-            "qaId": "58d8fb62eb29aa1c4a301b40"
+app.controller('QAControl', function($scope, $http) {
+    var config = { headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
         }
-    ];
+    };
+    var configJSON = { headers: {
+        'Content-Type': 'application/json'
+    }
+    };
+
+    $http.get("http://localhost:5000/bot/58ac69c6eb29aa3a897b97ac/questionAnswers", config)
+        .then(function(response) {
+            $scope.QAList = response.data.data.questionAnswers;
+        });
 
     $scope.deleteQA = function(item) {
-        var index = $scope.QAList.indexOf(item);
+        var id = item.qaId;
         if(confirm("Are you sure?")) {
-            $scope.QAList.splice(index, 1);
+            $http.delete("http://localhost:5000/bot/58ac69c6eb29aa3a897b97ac/questionAnswers/"+id, config)
+                .then(function() {
+                    $http.get("http://localhost:5000/bot/58ac69c6eb29aa3a897b97ac/questionAnswers", config)
+                        .then(function(response) {
+                            $scope.QAList = response.data.data.questionAnswers;
+                        });
+                });
         }
     }
 
@@ -41,14 +38,28 @@ app.controller('QAControl', function($scope) {
 
     $scope.saveQA = function(q, a, id, index) {
         if (index === -1) {
-            var newQA = {"question": q, "answer": a, "qaId": "1"};
-            $scope.QAList.push(newQA);
-            $scope.state = !$scope.state;
+            var newQA = {"question": q, "answer": a};
+
+            $http.post("http://localhost:5000/bot/58ac69c6eb29aa3a897b97ac/questionAnswers", newQA, configJSON)
+                .then(function(){
+                    $http.get("http://localhost:5000/bot/58ac69c6eb29aa3a897b97ac/questionAnswers", config)
+                        .then(function(response) {
+                            $scope.QAList = response.data.data.questionAnswers;
+                        });
+                    $scope.state = !$scope.state;
+                });
         }
         else {
             var editedQA = {"question": q, "answer": a, "qaId": id};
-            $scope.QAList[index] = editedQA;
-            $scope.state = !$scope.state;
+
+            $http.put("http://localhost:5000/bot/58ac69c6eb29aa3a897b97ac/questionAnswers/"+editedQA.qaId, editedQA, configJSON)
+                .then(function() {
+                    $http.get("http://localhost:5000/bot/58ac69c6eb29aa3a897b97ac/questionAnswers", config)
+                        .then(function(response) {
+                            $scope.QAList = response.data.data.questionAnswers;
+                        });
+                    $scope.state = !$scope.state;
+                });
         }
     }
 

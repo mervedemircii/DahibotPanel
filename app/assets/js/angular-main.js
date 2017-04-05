@@ -29,4 +29,9 @@ app.controller('QAControl', function($scope) {
             $scope.QAList.splice(index, 1);
         }
     }
+
+    $scope.saveNewQA = function(q, a) {
+        var newQA = {"question": q, "answer": a, "qaId": "1"};
+        $scope.QAList.push(newQA);
+    }
 });

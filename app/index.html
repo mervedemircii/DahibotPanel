@@ -22,15 +22,15 @@
         <div class="panel-body">
             <form class="form-inline">
                 <label for="newQuestion" style="width: 20%;">Question : </label>
-                <input id="newQuestion" type="text" class="form-control" placeholder="Question" style="width: 79%;">
+                <input id="newQuestion" ng-model="newQue" type="text" class="form-control" placeholder="Question" style="width: 79%;">
             </form>
             <br>
             <form class="form-inline">
                 <label for="newAnswer" style="width: 20%;">Answer : </label>
-                <input id="newAnswer" type="text" class="form-control" placeholder="Answer" style="width: 79%;">
+                <input id="newAnswer" ng-model="newAns" type="text" class="form-control" placeholder="Answer" style="width: 79%;">
             </form>
             <br>
-            <button class="btn btn-success pull-right"><span class="glyphicon glyphicon-save"></span> Save</button>
+            <button id="btnSave" ng-click="saveNewQA(newQue, newAns)" class="btn btn-success pull-right"><span class="glyphicon glyphicon-save"></span> Save</button>
         </div>
     </div>
 </div>

@@ -11,6 +11,10 @@ $(document).ready(function () {
         $(this).find("#btnEdit").hide();
         $(this).find("#btnDelete").hide();
     });
+
+    $('#btnEdit').click(function() {
+        console.log($(this).data("q"));
+    });
 });
 
 $(document).on('click', '#btn-newQA', function() {

@@ -12,3 +12,11 @@ $(document).ready(function () {
         $(this).find("#btnDelete").hide();
     });
 });
+
+$(document).on('click', '#btn-newQA', function() {
+    $(document).find('#newQA-modal').fadeIn();
+});
+
+$(document).on('click', '#btn-newQA-close', function() {
+    $(document).find('#newQA-modal').fadeOut();
+});

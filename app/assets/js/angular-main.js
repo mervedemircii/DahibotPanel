@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ["ngAnimate"]);
+var app = angular.module('myApp', []);
 app.controller('QAControl', function($scope, $http) {
     $scope.chatData = [
         {
@@ -35,13 +35,14 @@ app.controller('QAControl', function($scope, $http) {
         }
     }
 
-    $scope.addNewQA = function() {
+    $scope.openNewQA = function() {
         $scope.popupHeader = "New Question / Answer";
         $scope.qaQue = null;
         $scope.qaAns = null;
         $scope.qaIndex = -1;
         $scope.qaId = 0;
         $scope.state = !$scope.state;
+        document.getElementById("qaQuestion").focus();
     }
 
     $scope.saveQA = function(q, a, id, index) {

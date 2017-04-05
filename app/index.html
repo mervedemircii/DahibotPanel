@@ -12,12 +12,12 @@
     <link rel = "stylesheet" href = "assets/css/style.css">
 </head>
 <body id = "QAControl" ng-app = "myApp" ng-controller = "QAControl">
-<div id="newQA-modal" class="newQA-popup">
+<div ng-show="state" id="newQA-modal" class="newQA-popup">
     <br><br><br>
     <div class="panel panel-black col-lg-4 col-lg-offset-4">
         <div class="panel-heading panel-heading-black">
             <b>New Question / Answer</b>
-            <button id="btn-newQA-close" class="btn btn-sm btn-danger pull-right" style="margin-right: 1%;"><i class="glyphicon glyphicon-remove"></i></button>
+            <button id="btn-newQA-close" ng-click="state = !state" class="btn btn-sm btn-danger pull-right" style="margin-right: 1%;"><i class="glyphicon glyphicon-remove"></i></button>
         </div>
         <div class="panel-body">
             <form class="form-inline">
@@ -66,7 +66,7 @@
             <div class = "panel-body">
                 <form class = "form-inline">
                     <input type = "text" class = "form-control" style = "width: 67%;" placeholder = "Search" ng-model = "search">
-                    <button id="btn-newQA" class = "btn btn-success" style = "width: 30%;"><span class = "glyphicon glyphicon-plus"></span> New Q/A</button>
+                    <button id="btn-newQA" ng-click="state = !state" class = "btn btn-success" style = "width: 30%;"><span class = "glyphicon glyphicon-plus"></span> New Q/A</button>
                 </form>
                 <br>
                 <ul class = "list-group">
@@ -76,7 +76,7 @@
                             <p id="Answer" class = "list-group-item-text" style = "font-style: italic;">{{qa.answer}}</p>
                         </div>
                         <div class = "col-lg-2">
-                            <button id = "btnEdit" data-q={{qa.question}} data-a={{qa.answer}} class = "btn btn-sm btn-warning" style = "display: none;"><span class = "glyphicon glyphicon-pencil"></span></button>
+                            <button id = "btnEdit" ng-click="editQA(qa)" data-q={{qa.question}} data-a={{qa.answer}} class = "btn btn-sm btn-warning" style = "display: none;"><span class = "glyphicon glyphicon-pencil"></span></button>
                             <button id = "btnDelete" ng-click = "deleteQA(qa)" class = "btn btn-sm btn-danger" style = "display: none;"><span class = "glyphicon glyphicon-remove"></span></button>
                         </div>
                     </li>

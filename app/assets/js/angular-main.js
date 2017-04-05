@@ -30,8 +30,22 @@ app.controller('QAControl', function($scope) {
         }
     }
 
+    $scope.addnewQA = function() {
+        $scope.state = !$scope.state;
+    }
+
     $scope.saveNewQA = function(q, a) {
         var newQA = {"question": q, "answer": a, "qaId": "1"};
         $scope.QAList.push(newQA);
+        $scope.state = !$scope.state;
+    }
+
+    $scope.editQA = function(cQA) {
+        $scope.newQue = cQA.question;
+        $scope.state = !$scope.state;
+    }
+
+    $scope.closeNewQA = function() {
+        $scope.state = !$scope.state;
     }
 });

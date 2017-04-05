@@ -11,16 +11,4 @@ $(document).ready(function () {
         $(this).find("#btnEdit").hide();
         $(this).find("#btnDelete").hide();
     });
-
-    $('#btnEdit').click(function() {
-        console.log($(this).data("q"));
-    });
-});
-
-$(document).on('click', '#btn-newQA', function() {
-    $(document).find('#newQA-modal').fadeIn();
-});
-
-$(document).on('click', '#btn-newQA-close', function() {
-    $(document).find('#newQA-modal').fadeOut();
 });

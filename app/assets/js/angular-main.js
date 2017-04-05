@@ -30,18 +30,34 @@ app.controller('QAControl', function($scope) {
         }
     }
 
-    $scope.addnewQA = function() {
+    $scope.addNewQA = function() {
+        $scope.popupHeader = "New Question / Answer";
+        $scope.qaQue = null;
+        $scope.qaAns = null;
+        $scope.qaIndex = -1;
+        $scope.qaId = 0;
         $scope.state = !$scope.state;
     }
 
-    $scope.saveNewQA = function(q, a) {
-        var newQA = {"question": q, "answer": a, "qaId": "1"};
-        $scope.QAList.push(newQA);
-        $scope.state = !$scope.state;
+    $scope.saveQA = function(q, a, id, index) {
+        if (index === -1) {
+            var newQA = {"question": q, "answer": a, "qaId": "1"};
+            $scope.QAList.push(newQA);
+            $scope.state = !$scope.state;
+        }
+        else {
+            var editedQA = {"question": q, "answer": a, "qaId": id};
+            $scope.QAList[index] = editedQA;
+            $scope.state = !$scope.state;
+        }
     }
 
     $scope.editQA = function(cQA) {
-        $scope.newQue = cQA.question;
+        $scope.qaIndex = $scope.QAList.indexOf(cQA);
+        $scope.qaQue = cQA.question;
+        $scope.qaAns = cQA.answer;
+        $scope.qaId = cQA.qaId;
+        $scope.popupHeader = "Edit Question / Answer";
         $scope.state = !$scope.state;
     }
 

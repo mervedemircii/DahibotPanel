@@ -1,0 +1,53 @@
+<div ng-show="state" class="QA-popup">
+    <br><br><br>
+    <div class="panel panel-default col-lg-4 col-lg-offset-4 col-sm-12 col-xs-12">
+        <div class="panel-heading">
+            <b>{{popupHeader}}</b>
+            <button ng-click="state = !state" class="btn btn-sm btn-danger pull-right" style="margin-right: 1%;"><i class="fa fa-remove"></i></button>
+        </div>
+        <div class="panel-body">
+            <form class="form-inline">
+                <label for="qaQuestion" style="width: 20%;">Question : </label>
+                <input id="qaQuestion" ng-model="qaQue" type="text" class="form-control" placeholder="Question..." style="width: 79%;">
+            </form>
+            <br>
+            <form class="form-inline">
+                <label for="qaAnswer" style="width: 20%;">Answer : </label>
+                <input id="qaAnswer" ng-model="qaAns" type="text" class="form-control" placeholder="Answer..." style="width: 79%;">
+            </form>
+            <br>
+            <input type="hidden" ng-model="qaIndex">
+            <input type="hidden" ng-model="qaId">
+            <button ng-click="saveQA(qaQue, qaAns, qaId, qaIndex)" class="btn btn-success pull-right"><i class="fa fa-save"></i> Save</button>
+        </div>
+    </div>
+</div>
+<div class="header">
+    <form class="form-inline">
+        <input ng-model="search" type="text" class="form-control btn-round" placeholder="Search for...">
+        <button type="button" class="btn btn-round" ng-click="openNewQA()">New Question / Answer</button>
+    </form>
+</div>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <ul class = "list-group">
+                <li id = "QA" class = "repeat-item list-group-item clearfix" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()" ng-repeat = "qa in QAList | filter:search">
+                    <div class = "col-lg-10">
+                        <h4 id="Question" class = "list-group-item-heading" style = "font-weight: bold;">{{qa.question}}</h4>
+                        <p id="Answer" class = "list-group-item-text" style = "font-style: italic;">{{qa.answer}}</p>
+                    </div>
+                    <div class = "col-lg-2">
+                        <button id = "btnEdit" ng-show="isHovered" ng-click="openEditQA(qa)" data-q={{qa.question}} data-a={{qa.answer}} class = "btn btn-sm btn-warning"><span class = "fa fa-edit"></span></button>
+                        <button id = "btnDelete" ng-show="isHovered" ng-click = "deleteQA(qa)" class = "btn btn-sm btn-danger"><span class = "fa fa-remove"></span></button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="stats">
+            <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+        </div>
+    </div>
+</div>
